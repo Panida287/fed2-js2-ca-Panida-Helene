@@ -19,14 +19,8 @@ export const API_SOCIAL_POSTS = `${API_SOCIAL}/posts`;
 export const API_SOCIAL_PROFILES = `${API_SOCIAL}/profiles`;
 
 
-    // "name": "panidahelene", // Required
-    // "email": "panida.helene@stud.noroff.no", // Required
-    // "password": "panidahelene1234", // Required
+    // "name": "panidahelene", 
+    // "email": "panida.helene@stud.noroff.no", 
+    // "password": "panidahelene1234", 
 
-    // const options = {
-    //     headers: {
-    //       'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoicGFuaWRhaGVsZW5lIiwiZW1haWwiOiJwYW5pZGEuaGVsZW5lQHN0dWQubm9yb2ZmLm5vIiwiaWF0IjoxNzI3MTE0NzU3fQ.lFMR4IjpbFv4c6243Egpo7v3DG0Qx9eD7QouDUi8454',
-    //       'X-Noroff-API-Key': 'd5b92f07-8a9c-4bf8-a081-8748ef214771'
-    //     }
-    //   };
   
