@@ -1,4 +1,5 @@
 import { getKey } from "./auth/key";
+import { API_KEY } from "./constants";
 /**
  * Asynchronously generates and returns a Headers object for API requests.
  * 
