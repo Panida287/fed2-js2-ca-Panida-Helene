@@ -1,9 +1,8 @@
-import { API_SOCIAL_POSTS, API_KEY, API_SOCIAL_PROFILES } from "../constants";
-import { getKey } from "../auth/key";
+import { API_SOCIAL_POSTS, API_SOCIAL_PROFILES } from "../constants";
 import { headers } from "../auth/headers";
 
 /**
- * Fetches a list of posts with pagination.
+ * Fetches a list of posts
  *
  * @param {number} [limit=12] - The number of posts to retrieve per page.
  * @param {number} [page=1] - The page number to retrieve.
