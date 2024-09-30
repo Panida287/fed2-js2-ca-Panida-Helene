@@ -1,6 +1,6 @@
 import { API_SOCIAL_POSTS, API_SOCIAL_PROFILES } from "../constants";
-import { headers } from "../auth/headers";
-
+import { headers } from "../headers";
+;
 /**
  * Fetches a list of posts
  *
@@ -12,11 +12,11 @@ import { headers } from "../auth/headers";
 
 
 export async function readPosts(limit = 12, page = 1,) {
-    const headers = headers();
+    const myHeaders = await headers();
   
     const requestOptions = {
       method: "GET",
-      headers: headers,
+      headers: myHeaders,
     };
   
     try {
@@ -42,11 +42,11 @@ export async function readPosts(limit = 12, page = 1,) {
  */
 
 export async function readPost(postId) {
-    const myHeaders = headers();
+    const myHeaders = await headers();
 
     const requestOptions = {
         method: "GET",
-        headers: headers,
+        headers: myHeaders,
     };
 
     try {
@@ -79,7 +79,7 @@ export async function readPost(postId) {
  * @throws Will throw an error if the network request fails.
  */
 export async function readPostsByUser(username, limit = 12, page = 1, tag) {
-  const headers = headers();
+  const myHeaders = await headers();
 
   let queryParams = `?limit=${limit}&page=${page}&_author=true`;
 
@@ -89,7 +89,7 @@ export async function readPostsByUser(username, limit = 12, page = 1, tag) {
 
   const requestOptions = {
     method: "GET",
-    headers: headers,
+    headers: myHeaders,
   };
 
   try {
