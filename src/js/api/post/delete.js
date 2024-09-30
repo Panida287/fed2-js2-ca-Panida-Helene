@@ -1,5 +1,5 @@
-import { API_SOCIAL_POSTS, API_KEY } from "../constants";
-import {headers } from "../../api/headers";
+import { API_SOCIAL_POSTS } from "../constants";
+import { headers } from "../headers";
 
 /**
  * Deletes a post by sending a DELETE request to the social API.
@@ -18,7 +18,7 @@ import {headers } from "../../api/headers";
  * @throws Will throw an error if the network request fails or the server response is not ok.
  */
 export async function deletePost(postId) {
-    const myHeaders = headers();
+    const myHeaders = await headers();
 
     const requestOptions = {
       method: "DELETE",
