@@ -1,3 +1,5 @@
+import { onLogout } from "../auth/logout";
+
 /**
  * Adds a click event listener to the logout button.
  * 
