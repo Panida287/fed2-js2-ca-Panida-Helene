@@ -14,7 +14,6 @@ import { headers } from "../headers";
  */
 
 export async function readProfile(username) {
-   
     const myHeaders = await headers();
 
     try {
@@ -33,6 +32,7 @@ export async function readProfile(username) {
     } catch (error) {
         console.error("Error fetching profile:", error);
         throw error;
-    }}
+    }
+}
 
 export async function readProfiles(limit, page) {}

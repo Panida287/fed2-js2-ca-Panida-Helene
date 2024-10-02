@@ -1,7 +1,7 @@
 import { authGuard } from "../../utilities/authGuard";
 import { readPost } from '../../api/post/read.js';
 import { onUpdatePost } from '../../ui/post/update.js';
-import { getPostIDFromURL } from '../../utilities/getPostIDFromURL.js';
+import { getIDFromURL } from "../../utilities/urlIDUtils.js";
 
 authGuard();
 
@@ -16,7 +16,7 @@ authGuard();
  * @returns {Promise<void>} Resolves when the form is populated or if an error occurs.
  */
 async function populateForm() {
-    const postID = getPostIDFromURL();
+    const postID = getIDFromURL('postID');
     if (!postID) {
         console.error('Post ID not found in URL.');
         return;
@@ -39,6 +39,12 @@ async function populateForm() {
 }
 
 const form = document.getElementById('edit-post-form');
+
+/**
+ * Adds a submit event listener to the edit post form.
+ * 
+ * When the form is submitted, the `onUpdatePost` function is called to handle the post update process.
+ */
 form.addEventListener('submit', onUpdatePost);
 
 populateForm();
