@@ -11,7 +11,6 @@ import { getIDFromURL } from "../../utilities/urlIDUtils";
  * @throws Will throw an error if the network request fails.
  */
 
-
 export async function readPosts(limit = 12, page = 1,) {
     const myHeaders = await headers();
   
@@ -68,8 +67,6 @@ export async function readPost() {
     }
 }
 
-
-
 /**
  * Fetches posts created by a specific user, with optional pagination and tag filtering.
  *
@@ -79,34 +76,25 @@ export async function readPost() {
  * @returns {Promise<Object>} A promise that resolves to an object containing the user's posts.
  * @throws Will throw an error if the network request fails.
  */
-export async function readPostsByUser(limit = 12, page = 1, tag) {
-  const username = getIDFromURL('authorID');
-  const myHeaders = await headers();
+export async function readPostsByUser(limit = 12, page = 1, tag = null, username) {
+    const myHeaders = await headers();
 
-  let queryParams = `?limit=${limit}&page=${page}&_author=true`;
+    try {
+        const response = await fetch(`${API_SOCIAL_PROFILES}/${username}/posts`, {
+            method: "GET",
+            headers: myHeaders,
+        });
+        const result = await response.json();
 
-  if (tag) {
-    queryParams += `&tag=${encodeURIComponent(tag)}`;
-  }
-
-  const requestOptions = {
-    method: "GET",
-    headers: myHeaders,
-  };
-
-  try {
-    const apiUrl = `${API_SOCIAL_PROFILES}/${encodeURIComponent(username)}/posts${queryParams}`;
-
-    const response = await fetch(apiUrl, requestOptions);
-
-    if (!response.ok) {
-      throw new Error(`Failed to fetch posts for user ${username}: ${response.statusText}`);
+        if (response.ok) {
+            return result;
+        } else {
+            console.error(result);
+            throw new Error(`Failed to fetch posts: ${result.message}`);
+        }
+    } catch (error) {
+        console.error("Error fetching posts:", error);
+        throw error;
     }
-
-    const result = await response.json();
-    return result;
-  } catch (error) {
-    console.error("Error fetching posts by user:", error);
-    throw error;
-  }
 }
+

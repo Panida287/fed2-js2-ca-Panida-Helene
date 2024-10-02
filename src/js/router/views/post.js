@@ -1,24 +1,34 @@
 import { readPost } from '../../api/post/read';
 import { deletePost } from '../../api/post/delete';
 import { setLogoutListener } from '../../ui/global/logout';
+import { getIDFromURL } from "../../utilities/urlIDUtils";
 
-document.addEventListener('DOMContentLoaded', () => {
-    setLogoutListener();
-});
+setLogoutListener(); 
 
-export function getPostIDFromURL() {
-    const params = new URLSearchParams(window.location.search);
-    return params.get('postID');
-}
-
+/**
+ * Fetches and renders a single post in the DOM.
+ * 
+ * This function retrieves the post ID from the URL, fetches the post data using the `readPost` function,
+ * and dynamically creates HTML elements to display the post's content, media, author information,
+ * and the last updated date. If the logged-in user is the author of the post, edit and delete buttons
+ * are displayed to allow post modification.
+ * 
+ * @async
+ * @function renderPost
+ * @returns {Promise<void>} A promise that resolves when the post is rendered.
+ * 
+ * @throws {Error} Logs an error message if fetching the post fails or if the post ID is not found.
+ */
 async function renderPost() {
-    const postID = getPostIDFromURL();
-    console.log('Post ID:', postID);
+    const postID = getIDFromURL('postID');
+
+    if (!postID) {
+        console.error('Post ID not found in URL.');
+        return;
+    }
 
     try {
-        console.log('Fetching post with ID:', postID);
         const post = await readPost(postID);
-        console.log('Fetched post:', post); 
 
         if (!post) {
             console.error('No post data found');
@@ -81,6 +91,7 @@ async function renderPost() {
             deleteButton.addEventListener('click', async () => {
                 if (confirm("Are you sure you want to delete this post?")) {
                     await deletePost(postID);
+                    window.location.href = '/';
                 }
             });
 
@@ -102,4 +113,3 @@ async function renderPost() {
 }
 
 renderPost();
-
