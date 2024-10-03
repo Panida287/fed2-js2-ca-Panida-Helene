@@ -29,6 +29,7 @@ export async function register({
   avatar,
 }) {
   const myHeaders = new Headers();
+  myHeaders.append("Content-Type", "application/json");
   const userInput = {
     
     name, 
